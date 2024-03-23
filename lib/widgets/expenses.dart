@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_expenses/expense_list_widget.dart';
 import 'package:travel_expenses/models/expense.dart';
 
 class Expenses extends StatefulWidget {
@@ -28,12 +29,12 @@ class _Expenses extends State<Expenses> {
 
   @override
   Widget build(context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         children: [
-          Text("Travel Expenses"),
-          Text("Chart goes here"),
-          Text("List of Expenses"),
+          const Text("Travel Expenses"),
+          const Text("Chart goes here"),
+          Expanded (child: ExpensesList(allExpenses: _myExpenses))
         ],
       ),
     );
