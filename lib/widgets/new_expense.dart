@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_expenses/models/expense.dart';
 
-
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
 
@@ -15,6 +14,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _chosenDate;
+  Category _chosenCategory = Category.food;
 
   @override
   void dispose() {
@@ -32,7 +32,7 @@ class _NewExpenseState extends State<NewExpense> {
         firstDate: firstDate,
         lastDate: now);
     setState(() {
-      _chosenDate= selectedDate;
+      _chosenDate = selectedDate;
     });
   }
 
@@ -68,12 +68,38 @@ class _NewExpenseState extends State<NewExpense> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(_chosenDate == null ? 'Select Date' : formatter.format(_chosenDate!)),
+                  Text(_chosenDate == null
+                      ? 'Select Date'
+                      : formatter.format(_chosenDate!)),
                   IconButton(
                       onPressed: _openDatePicker,
                       icon: const Icon(Icons.calendar_month))
                 ],
               )
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              const Text("Expense Category"),
+              const SizedBox(
+                width: 30,
+              ),
+              DropdownButton(
+                  value: _chosenCategory,
+                  items: Category.values.map
+                  ((category) => 
+                    DropdownMenuItem(
+                      value: category,
+                      child: Text(category.name.toUpperCase()))).toList(),
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() {
+                      _chosenCategory = value;
+                    });
+                  }),
             ],
           ),
           const SizedBox(
