@@ -33,6 +33,7 @@ class _Expenses extends State<Expenses> {
       isScrollControlled: true,
       context: context,
       builder: (modalContext) => NewExpense(onAddExpense: _addExpense),
+      backgroundColor: Theme.of(context).dialogTheme.backgroundColor,
     );
   }
 

@@ -16,11 +16,17 @@ class ExpensesList extends StatelessWidget {
       itemBuilder: (listContext, index) => Dismissible(
         onDismissed: (direction) {
           onRemoveExpense(allExpenses[index],);
-          print(direction); //tried to see what gets printed when we swipe left and right, may be you could use this?
+          print(direction); //tried to see what gets printed when we swipe left and right, may be you could use this to have background colours?
         },
         key: ValueKey(allExpenses[index]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+          ),
+        ),
         child: ExpenseItem(allExpenses[index]),
-      ) 
+        ) 
       
     );
   }
